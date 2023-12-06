@@ -59,7 +59,20 @@ ${1:df}.write_csv('${2:file_name}.csv')
 endsnippet
 
 snippet te "pl write_excel"
-${1:df}.to_pandas().to_excel('${2:file_name}.xlsx',${3:sheet_name='${4:None}'},${5:index=${6:False}})
+from xlsxwriter import Workbook
+with Workbook(outputfile) as wb:
+		sheet_names = [sheet_names]
+		for item in sheet_names:
+				wb.add_worksheet(item)
+		${1:df}.write_excel(
+				workbook=wb,
+				worksheet=sheet_names[0],
+				# position=(3, 1),  # specify position as (row,col) coordinates
+				# conditional_formats={"num": "3_color_scale", "val": "data_bar"},
+				# table_style="Table Style Medium 4",
+				# autofit=True,
+		)
+
 endsnippet
 
 snippet tq "pl to sql"
